@@ -1,0 +1,11 @@
+# System files
+
+.DS_Store
+Thumbs.db
+*~
+
+# Working files
+
+.vscode/
+.editorconfig
+*.py[co]
