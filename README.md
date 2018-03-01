@@ -3,6 +3,8 @@
     docker-compose run web django-admin.py startproject myproject .
     docker-compose run web django-admin.py startapp myapp
 
+    docker-compose run web python3 manage.py migrate
+
 
 
 # Notes
