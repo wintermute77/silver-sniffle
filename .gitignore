@@ -9,3 +9,7 @@ Thumbs.db
 .vscode/
 .editorconfig
 *.py[co]
+
+# Generated files
+
+static/
