@@ -1,14 +1,51 @@
 version: '3'
 
 services:
+  
   db:
-    image: postgres
-  web:
+    image: mysql
+    ports:
+      - "3306:3306"
+    networks:
+      main:
+        aliases:
+          - db
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=sniffle_db
+      - MYSQL_USER=sniffleuser
+      - MYSQL_PASSWORD=sniffle
+    volumes:
+      - ./data:/docker-entrypoint-initdb.d
+
+  app:
     build: .
-    command: python3 manage.py runserver 0.0.0.0:8000
+    #command: python3 manage.py runserver 0.0.0.0:8000
+    command: gunicorn myproject.wsgi:application --bind 0.0.0.0:8000 --workers 3
+    networks:
+      main:
+        aliases:
+          - app
     volumes:
       - .:/code
     ports:
-      - "8080:8000"
+      - "8000:8000"
     depends_on:
       - db
+
+  web:
+    image: nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+      - ./static:/srv/myproject/static
+    networks:
+      main:
+        aliases:
+          - web
+    depends_on:
+      - app
+
+networks:
+  main:

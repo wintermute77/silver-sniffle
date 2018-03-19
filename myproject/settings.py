@@ -75,11 +75,12 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
+        'ENGINE': 'django.db.backends.mysql', 
+        'NAME': 'sniffle_db',
+        'USER': 'root',
+        'PASSWORD': 'root',
         'HOST': 'db',
-        'PORT': 5432,
+        'PORT': '3306',
     }
 }
 
@@ -121,3 +122,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
