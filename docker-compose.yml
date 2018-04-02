@@ -21,7 +21,7 @@ services:
   app:
     build: .
     #command: python3 manage.py runserver 0.0.0.0:8000
-    command: gunicorn myproject.wsgi:application --bind 0.0.0.0:8000 --workers 3
+    command: gunicorn myproject.wsgi:application --bind 0.0.0.0:8000 --workers 3 --reload
     networks:
       main:
         aliases:
